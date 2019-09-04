@@ -48,6 +48,15 @@ type StateService = import("comlink/src/comlink").Remote<
   import("src/worker/state-service").default
 >;
 
+// HACK: From a file:// URL, we can't create a worker even with a relative URL.
+// As a workaround, create a worker via a blob URL.
+function newWorkerViaBlob(relativePath: string) {
+  const scriptURL = new URL(relativePath, document.baseURI);
+  const blob = new Blob(['importScripts("' + scriptURL.toString() + '");'],
+                        {type: 'text/javascript'});
+  return new Worker(window.URL.createObjectURL(blob));
+}
+
 const stateServicePromise: Promise<StateService> = (async () => {
   // We don't need the worker if we're prerendering
   if (prerender) {
@@ -56,7 +65,7 @@ const stateServicePromise: Promise<StateService> = (async () => {
   }
 
   // The timing of events here is super buggy on iOS, so we need to tread very carefully.
-  const worker = new Worker(workerURL);
+  const worker = newWorkerViaBlob(workerURL);
   // @ts-ignore - iOS Safari seems to wrongly GC the worker. Throwing it to the global to prevent
   // that happening.
   self.w = worker;
