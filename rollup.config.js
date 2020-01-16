@@ -44,9 +44,10 @@ function buildConfig({ prerender, watch } = {}) {
       bootstrap: "src/main/bootstrap.tsx",
       sw: "src/sw/index.ts"
     },
+    preserveModules: true,
     output: {
       dir: "dist",
-      format: "amd",
+      format: "es",
       sourcemap: !prerender,
       entryFileNames: "[name].js",
       chunkFileNames: "[name]-[hash].js"
@@ -108,6 +109,7 @@ function buildConfig({ prerender, watch } = {}) {
       }),
       chunkNamePlugin(),
       nodeResolve(),
+      /*
       loadz0r({
         loader: readFileSync("./lib/loadz0r-loader.ejs").toString(),
         // `prependLoader` will be called for every chunk. If it returns `true`,
@@ -121,10 +123,11 @@ function buildConfig({ prerender, watch } = {}) {
           );
         }
       }),
+      */
       // noBuild if we're prerendering. The non-prerender build takes care of the TS building.
       simpleTS("src/main", { noBuild: prerender, watch }),
       resourceListPlugin(),
-      !prerender && terser(),
+      // !prerender && terser(),
       prerender ? renderStaticPlugin() : createHTMLPlugin()
     ].filter(item => item)
   };
@@ -132,7 +135,7 @@ function buildConfig({ prerender, watch } = {}) {
 
 export default function({ watch }) {
   return [
-    buildConfig({ watch, prerender: false }),
-    buildConfig({ watch, prerender: true })
+    buildConfig({ watch, prerender: false })
+    // buildConfig({ watch, prerender: true })
   ];
 }
