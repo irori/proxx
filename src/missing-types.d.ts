@@ -8,7 +8,7 @@ declare module "resource-list:" {
   export default value;
 }
 
-declare module "consts:version" {
+declare module "consts:version.const" {
   const value: string;
   export default value;
 }

@@ -1,4 +1,4 @@
-import version from "consts:version";
+import version from "consts:version.const";
 import resourceList from "resource-list:";
 // Give TypeScript the correct global.
 declare var self: ServiceWorkerGlobalScope;

@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import prerender from "consts:prerender";
+import prerender from "consts:prerender.const";
 import { Component, h } from "preact";
 import {
   getPresetName,

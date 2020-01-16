@@ -32,6 +32,7 @@ import { color as nebulaColor, hex as nebulaHex } from "./lib/nebula-safe-dark";
 import pkg from "./package.json";
 import createHTMLPlugin from "./lib/create-html";
 import addFilesPlugin from "./lib/add-files-plugin";
+import renameExtensions from '@betit/rollup-plugin-rename-extensions';
 
 // Delete 'dist'
 rimraf.sync("dist");
@@ -75,9 +76,9 @@ function buildConfig({ prerender, watch } = {}) {
         ]
       }),
       constsPlugin({
-        version: pkg.version,
-        nebulaSafeDark: nebulaColor,
-        prerender
+        'version.const': pkg.version,
+        'nebulaSafeDark.const': nebulaColor,
+        'prerender.const': prerender
       }),
       glsl({ minify: !prerender }),
       ejsAssetPlugin("./src/manifest.ejs", "manifest.json", {
@@ -124,6 +125,15 @@ function buildConfig({ prerender, watch } = {}) {
         }
       }),
       */
+      renameExtensions({
+        mappings: {
+          '.css': '.css.js',
+          '.ts': '.ts.js',
+          '.tsx': '.tsx.js',
+          '.glsl': '.glsl.js',
+          '.const': '.const.js'
+        }
+      }),
       // noBuild if we're prerendering. The non-prerender build takes care of the TS building.
       simpleTS("src/main", { noBuild: prerender, watch }),
       resourceListPlugin(),

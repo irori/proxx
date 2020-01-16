@@ -1,9 +1,9 @@
-declare module "consts:nebulaSafeDark" {
+declare module "consts:nebulaSafeDark.const" {
   const value: import("./rendering/constants").Color;
   export default value;
 }
 
-declare module "consts:prerender" {
+declare module "consts:prerender.const" {
   const value: boolean;
   export default value;
 }

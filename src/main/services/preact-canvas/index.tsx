@@ -11,8 +11,8 @@
  * limitations under the License.
  */
 import workerURL from "chunk-name:./../../../worker";
-import nebulaSafeDark from "consts:nebulaSafeDark";
-import prerender from "consts:prerender";
+import nebulaSafeDark from "consts:nebulaSafeDark.const";
+import prerender from "consts:prerender.const";
 import { Component, h, VNode } from "preact";
 import toRGB from "src/main/utils/to-rgb";
 import { bind } from "src/utils/bind";
@@ -56,7 +56,7 @@ const stateServicePromise: Promise<StateService> = (async () => {
   }
 
   // The timing of events here is super buggy on iOS, so we need to tread very carefully.
-  const worker = new Worker(workerURL);
+  const worker = new Worker(workerURL + '.js', {type: 'module'});
   // @ts-ignore - iOS Safari seems to wrongly GC the worker. Throwing it to the global to prevent
   // that happening.
   self.w = worker;

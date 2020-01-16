@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import prerender from "consts:prerender";
+import prerender from "consts:prerender.const";
 import { h, render } from "preact";
 import Root from "src/main/services/preact-canvas";
 import { main } from "./style.css";

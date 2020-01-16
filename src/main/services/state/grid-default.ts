@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import prerender from "consts:prerender";
+import prerender from "consts:prerender.const";
 import { get, set } from "idb-keyval";
 import { GridType } from "../preact-canvas";
 import { presets } from "./grid-presets";

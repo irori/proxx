@@ -11,7 +11,7 @@
  * limitations under the License.
  */
 
-import version from "consts:version";
+import version from "consts:version.const";
 
 import { del, get, set } from "idb-keyval";
 
