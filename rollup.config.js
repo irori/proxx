@@ -137,7 +137,7 @@ function buildConfig({ prerender, watch } = {}) {
       // noBuild if we're prerendering. The non-prerender build takes care of the TS building.
       simpleTS("src/main", { noBuild: prerender, watch }),
       resourceListPlugin(),
-      // !prerender && terser(),
+      !prerender && terser(),
       prerender ? renderStaticPlugin() : createHTMLPlugin()
     ].filter(item => item)
   };
