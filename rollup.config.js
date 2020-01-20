@@ -33,6 +33,7 @@ import pkg from "./package.json";
 import createHTMLPlugin from "./lib/create-html";
 import addFilesPlugin from "./lib/add-files-plugin";
 import renameExtensions from '@betit/rollup-plugin-rename-extensions';
+import wbnOutput from './lib/wbn-output';
 
 // Delete 'dist'
 rimraf.sync("dist");
@@ -138,7 +139,8 @@ function buildConfig({ prerender, watch } = {}) {
       simpleTS("src/main", { noBuild: prerender, watch }),
       resourceListPlugin(),
       !prerender && terser(),
-      prerender ? renderStaticPlugin() : createHTMLPlugin()
+      prerender ? renderStaticPlugin() : createHTMLPlugin(),
+      wbnOutput('https://proxx.app/', 'proxx.wbn')
     ].filter(item => item)
   };
 }

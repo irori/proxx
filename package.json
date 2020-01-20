@@ -61,6 +61,7 @@
     "travis-size-report": "^1.0.1",
     "tslint": "^5.16.0",
     "typed-css-modules": "^0.4.2",
-    "typescript": "^3.5.2"
+    "typescript": "^3.5.2",
+    "wbn": "0.0.4"
   }
 }
